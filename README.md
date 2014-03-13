@@ -10,11 +10,9 @@ Stone 是一款开源免费的JS web ui 控件组合，使用插件式的开发�
 	var Smile = stone.Class.extend({
 		init: function() {
 			Log.out('init smile');
-			
 			this.name = 'super';
 		},
 		smile : function(name) {
-			
 			Log.out('super\'s smile > ' + name);
 		}
 	});
