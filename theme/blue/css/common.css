@@ -1,0 +1,78 @@
+.s-loading {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background:url(../images/loading_2.gif) no-repeat center center
+}
+.s-window-proxy {
+  	border: 1px dashed #575765;
+  	background: #ccc;
+ 	position: absolute;
+  	left: 0;
+  	top: 0;
+  	width: 100%;
+  	height: 100%;
+  	font-size: 2px;
+  	filter: alpha(opacity=30);
+  	opacity: 0.3;
+  	*zoom: 1;
+  	overflow: hidden;
+	-moz-border-radius: 3px 3px 3px 3px;
+	-webkit-border-radius: 3px 3px 3px 3px;
+	border-radius: 3px 3px 3px 3px;
+}
+.s-window-mask {
+	position: fixed;
+	left: 0;
+	top: 0;
+	background: #ccc;
+	width: 100%;
+	height: 100%;
+	filter: alpha(opacity=40);
+	opacity: 0.40;
+	font-size: 1px;
+	*zoom: 1;
+	overflow: hidden;
+}
+.s-button {
+	display: inline-block;
+	color: #333;
+	background-color: #fff;
+	padding: 4px 10px;
+	font-size: 13px;
+	font-weight: normal;
+	line-height: 16px;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+.s-button:hover {
+  	color: #333333;
+  	background-color: #eaf2ff;
+  	border-color: #b7d2ff;
+}
+.s-button-primary {
+	color: #fff;
+	background-color: #428bca;
+	border-color: #357ebd;
+}
+.s-button-primary:hover {
+  	color: #ffffff;
+  	background-color: #3276b1;
+  	border-color: #285e8e;
+}
+@media screen and (min-width:0) {/* css3 */
+	.s-outer {
+		-webkit-transform: scale(0);
+		transform: scale(0);
+		-webkit-transition: -webkit-box-shadow .2s ease-in-out, -webkit-transform .2s ease-in-out; 
+		transition: box-shadow .2s ease-in-out, transform .2s ease-in-out;
+	}
+	.s-state-visible {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}

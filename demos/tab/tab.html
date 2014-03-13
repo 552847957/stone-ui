@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Tab</title>
+	<link href="../style.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="../../theme/default/css/tab.css" rel="stylesheet">
+	</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="header-brand">
+				<strong><a href="#">Stone</a></strong>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="bubble">
+			<span class="name">Tab</span>
+			<article class="content">
+				<button id="add">add</button>
+				<div id="tab" style="width:500px;height:200px;padding:10px;">
+					<div title="Tab1" closable="true" style="padding:20px;">
+						<div>
+							<p>tab1</p>
+						</div>
+					</div>
+					<div title="Tab2" style="padding:20px;">
+						<div>
+							<p>tab2</p>
+						</div>
+					</div>
+				</div>
+			</article>
+			<article class="content">
+				<pre><code id="source"></code></pre>
+			</article>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../jquery.min.js"></script>
+<script type="text/javascript" src="../main.js"></script>
+
+<script type="text/javascript" src="../../src/js/core.js"></script>
+<script type="text/javascript" src="../../src/js/utils.js"></script>
+<script type="text/javascript" src="../../src/js/tab.js"></script>
+<script type="text/javascript" id="script">
+$(function(){
+	var tab = new stone.Tab($('#tab'), {
+	});
+	
+	var tabCount = 5;
+	$('#add').click(function () {
+		tab.addTab({id : 'tab' + tabCount, title : 'tab' + tabCount, content : 'add test' + tabCount});
+		tabCount ++;
+	});
+	
+	tab.addTab({id : 'tab111' + tabCount, title : 'tab1111' + tabCount, href : 'http://www.baidu.com'});
+});
+</script>
+</html>

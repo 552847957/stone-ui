@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Class</title>
+	<link href="../style.css" media="all" rel="stylesheet" type="text/css" />
+	</head>
+<body>
+	<div class="container">
+		<div class="bubble">
+			<span class="name">Class</span>
+			<article class="content">
+				<p>Class 方法可以方便的创建一个JS类，同时可以方便的对现有类进行继承。</p>
+				<h2>示例</h2>
+				<pre><code id="source"></code></pre>
+			</article>
+		</div>
+		<div class="bubble">
+			<span class="name">console</span>
+			<div class="content" id="console"></div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../jquery.min.js"></script>
+<script type="text/javascript" src="../main.js"></script>
+<script type="text/javascript" src="../../src/js/core.js"></script>
+<script type="text/javascript" id="script">
+
+var Smile = stone.Class.extend({
+	init: function() {
+		Log.out('init smile');
+		
+		this.name = 'super';
+	},
+	smile : function(name) {
+		
+		Log.out('super\'s smile > ' + name);
+	}
+});
+
+var Hello = Smile.extend({
+	init: function(){
+		Log.out('init hello');
+		Smile.fn.init.call(this);
+	},
+	say: function(){
+		Log.out('hello\'s say');
+	}
+});
+
+var Hello2 = Smile.extend({
+	init: function(){
+	},
+	say: function(){
+		Log.out('hello\'s say');
+		
+		this.smile('h2')
+	}
+});
+
+$(function(){
+	//new Smile('smile');
+	function test(n){
+	   console.log("延迟输出！" + n);
+	}
+	var t = new stone.Class().defer(test, test, 5000);
+	t(1000);
+	 
+	var h = new Hello();
+	var h2 = new Hello2();
+	h.say();
+	h.smile('h');
+	
+	h2.say();
+	
+	stone.out('test');
+});
+</script>
+</html>

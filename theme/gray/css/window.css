@@ -1,0 +1,135 @@
+/* »ŒŒÒ¿∏ */
+.s-taskbar{background-image:url('../images/win/taskbar.png'); background-repeat:repeat-x; height:36px; line-height:36px; overflow:hidden; width:100%; position:fixed; left:0px; bottom:-36px; display:none; z-index: 11000;}
+.s-taskbar-tasks{ width:100%; margin-top:2px;}
+.s-taskbar-task{  height:26px; line-height:26px;overflow:hidden; margin:2px; float:left; margin-left:2px; position:relative; cursor:pointer; background-repeat:repeat-x;}
+.s-taskbar-task{ background-image:url('../images/win/taskbar-task.gif'); border:1px solid #676F7F;}
+.s-taskbar-task-icon{ position:absolute; left:5px; top:3px;width:24px; height:25px; overflow:hidden;background:url('../images/win/taskicon.gif') no-repeat;} 
+.s-taskbar-task-content{ margin-left:27px; color:White; font-weight:bold; margin-right:10px;}
+.s-taskbar-task-over{ border-color:#A7ADB5;background-position:0px -30px;}
+.s-taskbar-task-active{border-color:#A2A8AF;background-position:0px -60px; }
+.s-taskbar{_position:absolute;_bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0))); _background-image:url('../images/win/taskbar.gif');}
+.s-taskbar-top{ bottom:auto; top:0px; background-color:White; padding-bottom:1px; border-bottom:1px solid #687079;}
+.s-taskbar-top{_position:absolute;_top:expression(eval(document.documentElement.scrollTop));}
+
+.s-window {
+	position:absolute; 
+	background-color: #F2F2F2;
+	z-index: 9100;
+	padding: 28px 1px 1px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #D3D3D3;
+	-webkit-box-shadow: 1px 1px 5px 1px rgba(128,128,128,0.3);
+	box-shadow: 1px 1px 5px 1px rgba(128,128,128,0.3);
+
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+.s-window {
+	background-color: #f3f3f3;
+}
+.s-window-maximized {
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+.s-window .s-window-header {
+	position:relative;
+	margin-top: -28px;
+	padding:5px;
+	color:#183152; 
+	font-weight:bold; 
+	height:28px;
+	line-height:28px;
+	background: transparent;
+	overflow:hidden;
+	border-bottom:1px solid #D3D3D3;
+}
+.s-window .s-window-title {
+	font-size: 12px;
+	font-weight: bold;
+	color: #575765;
+	height: 18px;
+	line-height: 18px;
+}
+.s-window .s-window-header-actions {
+	position:absolute;
+	top:0;
+	padding-top: 5px;
+	right: .3em;
+}
+.s-window .s-window-header-actions div:hover{
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+  background-color: #bcb4b0;
+  -moz-border-radius: 2px 2px 2px 2px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
+}
+
+/* icons */
+.s-ico-toggle, .s-ico-min, .s-ico-max, .s-ico-restore, .s-ico-toggle-close, .s-ico-close {
+	float:left;
+	height:16px; 
+	width:16px; 
+	overflow:hidden; 
+	cursor:pointer; 
+	margin-left:5px;
+	vertical-align: top;
+	background-image: url('../images/window/actions.png');
+}
+.s-ico-toggle {
+	background-position: -32px 0; 
+}
+.s-ico-min {
+	background-position: 0px 0px;
+}
+.s-ico-max {
+	background-position: 0px -16px;
+}
+.s-ico-restore {
+	background-position: -16px -16px;
+}
+.s-ico-toggle-close {
+	background-position: -32px -16px;
+}
+.s-ico-close {
+	background-position: -16px 0px;
+}
+.s-window-content {
+	position: relative;
+	overflow:hidden;
+	outline: 0;
+	height:100%;
+	background-color: #ffffff;
+	-moz-border-radius: 0 0 4px 4px;
+	-webkit-border-radius: 0 0 4px 4px;
+	border-radius: 0 0 4px 4px;
+}
+.s-window-content-scroll {
+	overflow:scroll;
+}
+.s-window-content iframe {
+	border:none; 
+	width:100%; 
+	height:100%;
+}
+.s-window, .s-window *, .s-window *:before, .s-window *:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+@media screen and (min-width:0) {/* css3 */
+	.s-outer {
+		-webkit-transform: scale(0);
+		transform: scale(0);
+		-webkit-transition: -webkit-box-shadow .2s ease-in-out, -webkit-transform .2s ease-in-out; 
+		transition: box-shadow .2s ease-in-out, transform .2s ease-in-out;
+	}
+	.s-state-visible {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+

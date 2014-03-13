@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Index</title>
+	<link href="./style.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="../theme/default/css/panel.css" rel="stylesheet">
+	<link href="../theme/default/css/layout.css" rel="stylesheet">
+	<link href="../theme/default/css/tab.css" rel="stylesheet">
+	
+	<script type="text/javascript" src="./jquery.min.js"></script>
+	<script type="text/javascript" src="../src/js/core.js"></script>
+	<script type="text/javascript" src="../src/js/resizable.js"></script>
+	<script type="text/javascript" src="../src/js/panel.js"></script>
+	<script type="text/javascript" src="../src/js/layout.js"></script>
+	<script type="text/javascript" src="../src/js/tab.js"></script>
+	</head>
+<body>
+<div id="layout">
+	<div region='north' border="false" style="height:50px;">
+		<div class="header">
+				<div class="header-brand">
+					<strong><a href="#">Stone</a></strong>
+				</div>
+		</div>
+	</div>
+	<div region='west' title="Menu" split="true" style="width:180px;padding:10px;">
+		<ul class="menu">
+			<li><a href="./base/class.html">Class</a></li>
+			<li><a href="./drag/drag.html">Drag</a></li>
+			<li><a href="./resize/resizable.html">Resize</a></li>
+			<li><a href="./panel/panel.html">Panel</a></li>
+			<li><a href="./tab/tab.html">Tab</a></li>
+			<li><a href="./layout/layout.html">Layout</a></li>
+			<li><a href="./dialog/dialog.html">Dialog</a></li>
+			<li><a href="./window/window.html">Window</a></li>
+		</ul>
+	</div>
+	<div region='south' style="height:50px;padding-left:15px;">
+		<p>version <b>0.1</b></p>
+	</div>
+	<div region='center' border="false">
+		<div id="tab" fit="true">
+			<div title="Home" style="padding:20px;">
+				<div>
+					<p>Wecome to StoneUI</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" id="script">
+$(function(){
+	var layout = new stone.Layout($('#layout'), {
+		fit : true
+	});
+	
+	var tab = new stone.Tab($('#tab'));
+	
+	$('.menu').find('a').click(function (e) {
+		var url = $(this).attr('href');
+		var text = $(this).text();
+		$(this).attr('href', 'javascript:;');
+		
+		tab.addTab({tabId: text, title: text, href : url});
+		
+		e.stopPropagation();
+	});
+	
+});
+</script>
+</html>

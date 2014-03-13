@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Extend</title>
+	<link href="../style.css" media="all" rel="stylesheet" type="text/css" />
+	</head>
+<body>
+	<div class="container">
+		<div class="bubble">
+			<span class="name">Extend</span>
+			<article class="content">
+				<p>extend 方法可以对一个对象或数组进行扩展，或多个 object 对象合并，相同的属性/数组下标，前一个会被后一个覆盖。</p>
+				<h2>1.引入</h2>
+				<p>引入core.js</p>
+				<pre><code id="source"></code></pre>
+			</article>
+		</div>
+		<div class="bubble">
+			<div class="content" id="console"></div>
+		</div>
+	</div>
+	<footer class="footer">
+		<div class="container">
+			<p>当前版本：1.0.0</p>
+		</div>
+	</footer>
+</body>
+<script type="text/javascript" src="../jquery.min.js"></script>
+<script type="text/javascript" src="../main.js"></script>
+<script type="text/javascript" src="../src/js/core.js"></script>
+<script type="text/javascript" id="script">
+$(function(){
+	var o = {a: 1, b: 2};
+	var q = {a: 11, b: 22, c: 33};
+	stone.extend(o, q);
+	Log.out(JSON.stringify(o));
+});
+</script>
+</html>

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Resizable</title>
+	<link href="../style.css" media="all" rel="stylesheet" type="text/css" />
+	</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="header-brand">
+				<strong><a href="#">Stone</a></strong>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="bubble">
+			<span class="name">Resizable</span>
+			<article class="content">
+				<div id="resize" class="drag" style="width:200px;height:150px;">Resize Me!</div>
+			</article>
+			<article class="content">
+				<pre><code id="source"></code></pre>
+			</article>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../jquery.min.js"></script>
+<script type="text/javascript" src="../main.js"></script>
+<script type="text/javascript" src="../../src/js/core.js"></script>
+<script type="text/javascript" src="../../src/js/resizable.js"></script>
+<script type="text/javascript" id="script">
+$(function(){
+	var resize = $('#resize').resizable({minHeight: 50, minWidth: 50});
+	
+});
+</script>
+</html>

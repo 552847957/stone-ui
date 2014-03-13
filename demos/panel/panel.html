@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Panel</title>
+	<link href="../style.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="../../theme/default/css/panel.css" rel="stylesheet">
+	</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="header-brand">
+				<strong><a href="#">Stone</a></strong>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="bubble">
+			<span class="name">Panel</span>
+			<article class="content">
+				<div id="panel" style="width:500px;height:200px;padding:10px;">
+					<p>panel</p>
+					<p>panel</p>
+					<p>panel</p>
+					<p>panel</p>
+					<p>panel</p>
+					<p>panel</p>
+					<p>panel</p>
+					<p>panel</p>
+					<p>panel</p>
+					<p>panel</p>
+					<p>panel</p>
+					<p>panel</p>
+				</div>
+			</article>
+			<article class="content">
+				<pre><code id="source"></code></pre>
+			</article>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../jquery.min.js"></script>
+<script type="text/javascript" src="../main.js"></script>
+
+<script type="text/javascript" src="../../src/js/core.js"></script>
+<script type="text/javascript" src="../../src/js/utils.js"></script>
+<script type="text/javascript" src="../../src/js/draggable.js"></script>
+<script type="text/javascript" src="../../src/js/resizable.js"></script>
+<script type="text/javascript" src="../../src/js/panel.js"></script>
+<script type="text/javascript" id="script">
+$(function(){
+	var panel = new stone.Panel($('#panel'), {
+		title:'This is Panel',
+		actions: ['toggle', 'min', 'max', 'close']
+	});
+	
+});
+</script>
+</html>
