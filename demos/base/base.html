@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Base</title>
+	<link href="../style.css" media="all" rel="stylesheet" type="text/css" />
+	</head>
+<body>
+	<div class="container">
+		<div class="bubble">
+			<span class="name">Base</span>
+			<article class="content">
+				<p>基础方法使用。</p>
+				<h2>示例</h2>
+				<pre><code id="source"></code></pre>
+			</article>
+		</div>
+		<div class="bubble">
+			<span class="name">console</span>
+			<div class="content" id="console"></div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../jquery.min.js"></script>
+<script type="text/javascript" src="../../src/core.js"></script>
+<script type="text/javascript" src="../main.js"></script>
+<script type="text/javascript" id="script">
+$(function(){
+	var a = [1, 2 ,3 ,4, 5];
+	// slice() 方法可从已有的数组中返回选定的元素。
+	console.log(stone.slice(a, 1));
+	
+	var q = {a: 11, b: 22, c: 33};
+	
+	// 遍历对象、数组的属性值
+	stone.each(q, function(i, n) {
+		Log.out(i + "->" + n);
+	});
+	
+	// 格式化输出
+	var r = stone.format('id="{0}" class="{1}"', 'testId', 'testClass');
+	Log.out(r);
+	
+	var r = stone.format('id="{a}" class="{b}"> text="{c}"', q);
+	Log.out(r);
+	
+	Log.out(stone.trim(' a bc '))
+	
+	var evt = new stone.Event();
+	evt.bind('test', function () {
+		alert('test');
+	})
+	
+	alert('hasBind -' + evt.hasBind('test'));
+	
+	evt.trigger('test');
+	
+	evt.unbind('test');
+	
+	alert('hasBind -' + evt.hasBind('test'));
+	
+});
+</script>
+</html>
