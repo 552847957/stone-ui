@@ -32,4 +32,6 @@ Stone 是一款jQuery的UI插件集合，使用插件式的开发模式，以简
 </script>
 ```
 
-更多的例子请参照工程目录下的 demo.
+HOME: http://nbless.com
+DEMO: http://nbless.com/stone-master/demos/
+
