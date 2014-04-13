@@ -51,13 +51,13 @@ $(function(){
 		alert('test');
 	})
 	
-	alert('hasBind -' + evt.hasBind('test'));
+	alert('hasEvent -' + evt.hasEvent('test'));
 	
 	evt.trigger('test');
 	
 	evt.unbind('test');
 	
-	alert('hasBind -' + evt.hasBind('test'));
+	alert('hasEvent -' + evt.hasEvent('test'));
 	
 });
 </script>

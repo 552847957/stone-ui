@@ -1,8 +1,8 @@
 /**
  * STONE (Javascript Extension Tools) 
  *
- * @version  0.1
- * @author   
+ * @version  1.0.1
+ * @author   langhsu(<a href="mailto:langhsu@gmail.com">langhsu@gmail.com</a>)   
  * 
  */
 
@@ -17,34 +17,48 @@
 
 (function ($) {
     // Define
-    var stone = stone || {},
+    var stone = window.stone || {},
     uuid = 0;
 
     // J = jQuery;
-    stone.version = '1.0';
+    stone.version = '1.0.1';
     
-    var type = function (obj) { return typeof obj;}
-    var isFunction = function (obj) { return type(obj) == "function";}
-	var isObject = function (obj) { return type(obj) == "object";}
-	var isArray = Array.isArray;
+    var type = function (obj) { return typeof obj;};
+    var isFunction = function (obj) { return type(obj) == "function";};
+	var isObject = function (obj) { return type(obj) == "object";};
+	var isArray = function(o) {
+        return o && (o.constructor === Array || Object.prototype.toString.call(o) === "[object Array]");
+    };
     
 	stone = {
+		type: type,
+		
+		isFunction: isFunction,
+		
+		isObject: isObject,
+		
+		isArray: isArray,
+		
+		noop : function () {
+			//I've got nothing to do
+		},
+		
 		/**
          * 格式化字符串
 		 
          * @param {String} 含占位符({index}/{property}})的字符串模板
          * @param {Object|...} arg {argument index} / {propertyName}
          * @example
-         * 		1. stone.format('<div class="{0}">, 'box');
-         * 		2. stone.format('<div class="{cls}">, {cls: 'box'});
-         * 		//output of both: <div class="box">
+         * 		1. stone.format('<div class="{0}">{1}</div>', 'box', 'text');
+         * 		2. stone.format('<div class="{cls}">{t}</div>', {cls: 'box', t: 'text'});
+         * 		//output of both: <div class="box">text</div>
          */
-        format: function (str, arg) {
-            if (!isObject(arg)) {
-                arg = stone.slice(arguments, 1);
+        format: function (str, args) {
+            if (!isObject(args)) {
+                args = stone.slice(arguments, 1);
             }
             return str.replace(/(^|[^\\])\{(\w+)\}/g, function (m, p, index) {
-                var x = arg[index];
+                var x = args[index];
                 return (p || '') + (x !== undefined ? x : '');
             });
         },
@@ -185,10 +199,10 @@
     Class.extend = function(proto) {
     	var that = this,
             klass = function() {},
-            fn; // super
+            fn, // super
             subclass = proto && proto.init ? proto.init : function () {
                 that.apply(this, arguments);
-            },
+            };
         klass.prototype = that.prototype;
         fn = subclass.fn = subclass.prototype = new klass();
         
@@ -278,7 +292,7 @@
      * @tips 当 options 中包含 'disabled', 则不会对该操作进行响应
      */
     Event = Class.extend({
-    	events : {},
+    	_events : {},
     	/**
          * 绑定一个事件，并且返回一个对象用于解绑该事件
          *
@@ -306,11 +320,11 @@
             if (typeof handler != 'function') return false;
             	
             var name = eventType.toLowerCase(),
-            	event = this.events[name] || [],
+            	event = this._events[name] || [],
             	state = context || this;
             
             event.push({handler : handler, context: state});
-            this.events[name] = event;
+            this._events[name] = event;
         },
 
         /**
@@ -326,16 +340,16 @@
         unbind: function (eventType, handler) {
         	// 不传参数清除所有事件
             if (!eventType) {
-                this.events = {};
+                this._events = {};
                 return;
             }
             var eventQueue = [], name = eventType.toLowerCase();
 
-            if (this.events[name]) eventQueue = this.events[name];
+            if (this._events[name]) eventQueue = this._events[name];
             	
             // 如果没有handler清除所有此类型的事件
             if (!handler) {
-                delete this.events[name];
+                delete this._events[name];
             } else {
                 for (var i = 0, l = eventQueue.length; i < l; i++) {
                     if (eventQueue[i].handler == handler) {
@@ -366,7 +380,7 @@
                 return false;
             }
             
-            if (this.events[name]) eventQueue = this.events[name];
+            if (this._events[name]) eventQueue = this._events[name];
             	
             for (var i = 0; i < eventQueue.length; i++) {
             	var evt = eventQueue[i];
@@ -375,20 +389,19 @@
             	}
             }
         },
-        hasBind: function (eventType) {
-            var event = this.events[eventType.toLowerCase()];
+        hasEvent: function (eventType) {
+            var event = this._events[eventType.toLowerCase()];
             if (event && event.length) return true;
             return false;
-        },
+        }
     });
     
     var Widget = function () {};
 	
     /**
-     * 为UI组件提供基类支持
+     * UI组件基类
      * 
-     * 拥有'init','_create','destroy'生命周期; 且继承了Event的所有属性, 可以为widget对象绑定相应的事件
-     * 通过重写其中的方法来实现自定义行为
+     * 拥有'init','_create','destroy'生命周期; 继承 Event
      * 
      * @tips Widget 被定义为用于继承的基类, 通常不会被直接实例化
      */
@@ -398,11 +411,14 @@
          * 该Id也为实例化后可以根据此ID获取实例对象
          */
         id : '',
+        
         name : 'widget',
+        
         /**
          * 存储实例化的插件实例对象,可以通过插件的名字获取
          */
         _plugins: [],
+        
         /**
          * 初始化widget
          * @param element 触发该widget操作的element
@@ -425,6 +441,7 @@
             // 缓存该对象以便获取
             stone.Register.add(this.name, this);
         },
+        
         _create: function () {
             if (!this._rendered) {
                 this.renderUI();
@@ -432,6 +449,7 @@
                 this._rendered = true;
             }
         },
+        
         /**
          * 通过该方法判断该组件是否已渲染
          * @return true/false
@@ -439,12 +457,14 @@
         isRender: function () {
             return this._rendered;
         },
+        
         /**
          * 渲染UI, 用于组件重写
          */
         renderUI: function() {},
+        
         /**
-         * 用于事件的绑定
+         * 事件绑定
          */
         bindEvents: function() {},
         
@@ -479,7 +499,7 @@
 		 * 设置 box model 宽度
 		 */
 		_outerWidth : function(width){
-			if (width == undefined){
+			if (typeof(width) == 'undefined'){
 				if (this[0] == window){
 					return this.width() || document.body.clientWidth;
 				}
@@ -498,7 +518,7 @@
 		 * 设置 box model 高度
 		 */
 		_outerHeight : function(height){
-			if (height == undefined){
+			if (typeof(height) == 'undefined'){
 				if (this[0] == window){
 					return this.height() || document.body.clientHeight;
 				}
@@ -517,7 +537,7 @@
 		 * 设置元素中滚动条的水平偏移
 		 */
 		_scrollLeft : function(left){
-			if (left == undefined){
+			if (typeof(left) == 'undefined'){
 				return this.scrollLeft();
 			} else {
 				return this.each(function () {
@@ -544,8 +564,8 @@
 
     	/**
 		 * 将stone下的插件桥接到jQuery
-		 * @param name {String} 插件名称
-		 * @param widget {Object} 对应的插件
+		 * @param {String} name 插件名称
+		 * @param {Function} widget 对应的插件Class
 		 */
 		bridgeTojQuery : function (name, widget) {
 			$.fn[name] = function (options) {
@@ -577,7 +597,7 @@
                 if (console.log) {
                 	console.log(message);
                 } else {
-                    alert(message);
+                    alert(msg);
                 }
             }
             return msg;
