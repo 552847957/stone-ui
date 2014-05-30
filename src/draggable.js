@@ -413,4 +413,4 @@
 	stone.bridgeTojQuery("drag", Drag);
 	stone.bridgeTojQuery("drop", Drop);
 	
-})(window.jQuery);
+})(jQuery);

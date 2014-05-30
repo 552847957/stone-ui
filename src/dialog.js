@@ -62,7 +62,7 @@
 				header : $(".s-dialog-header", win),
 				title : $(".s-dialog-title", win),
 				actions : $(".s-dialog-actions", win),
-				buttons : $(".s-dialog-buttons", win),
+				buttons : $(".s-dialog-buttons", win)
 			};
 			
 			if (opts.buttons) {
@@ -330,7 +330,7 @@
 					(options.onSure || $.noop).call(btn, dialog);
 					dialog.close();
 				}
-			}],
+			}]
         }, true);
 		return new Dialog(options);
 	};
@@ -362,7 +362,7 @@
 					(options.onCancel || $.noop).call(btn, dialog);
 					dialog.close();
 				}
-			}],
+			}]
         }, true);
 		return new Dialog(options);
 	};

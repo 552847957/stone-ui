@@ -436,7 +436,6 @@
             that.actived = true;
             that.minimize = false;
             that.show();
-            console.log(stone.zIndex);
             that.win.css('z-index', stone.zIndex ++);
         },
         destroy: function () {

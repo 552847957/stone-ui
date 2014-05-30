@@ -49,6 +49,7 @@
 			
 			var target = $(element);
 			
+			// load data
 			var state = $.data(target, 'panel');
 			if (!state) {
 				// 记住状态
@@ -355,4 +356,4 @@
 	stone.Panel = Panel;
 	stone.bridgeTojQuery("panel", Panel);
 	
-})(window.jQuery);
+})(jQuery);
