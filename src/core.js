@@ -25,33 +25,33 @@
     
     var type = function (obj) { return typeof obj;};
     var isFunction = function (obj) { return type(obj) == "function";};
-	var isObject = function (obj) { return type(obj) == "object";};
-	var isArray = function(o) {
+    var isObject = function (obj) { return type(obj) == "object";};
+    var isArray = function(o) {
         return o && (o.constructor === Array || Object.prototype.toString.call(o) === "[object Array]");
     };
     
-	stone = {
-		type: type,
-		
-		isFunction: isFunction,
-		
-		isObject: isObject,
-		
-		isArray: isArray,
-		
-		noop : function () {
-			//I've got nothing to do
-		},
-		
-		/**
+    stone = {
+        type: type,
+        
+        isFunction: isFunction,
+        
+        isObject: isObject,
+        
+        isArray: isArray,
+        
+        noop : function () {
+            //I've got nothing to do
+        },
+        
+        /**
          * 格式化字符串
-		 
+         
          * @param {String} 含占位符({index}/{property}})的字符串模板
          * @param {Object|...} arg {argument index} / {propertyName}
          * @example
-         * 		1. stone.format('<div class="{0}">{1}</div>', 'box', 'text');
-         * 		2. stone.format('<div class="{cls}">{t}</div>', {cls: 'box', t: 'text'});
-         * 		//output of both: <div class="box">text</div>
+         *         1. stone.format('<div class="{0}">{1}</div>', 'box', 'text');
+         *         2. stone.format('<div class="{cls}">{t}</div>', {cls: 'box', t: 'text'});
+         *         //output of both: <div class="box">text</div>
          */
         format: function (str, args) {
             if (!isObject(args)) {
@@ -62,10 +62,10 @@
                 return (p || '') + (x !== undefined ? x : '');
             });
         },
-		
-		/**
-		 * 从已有的数组中返回选定的元素
-		 * 
+        
+        /**
+         * 从已有的数组中返回选定的元素
+         * 
          * Same as Array.slice
          * 
          * @param {Array} array
@@ -83,96 +83,96 @@
                 if (from < 0) {
                     from += len;
                 }
-				
+                
                 if (end < 0) {
                     end += len;
                 }
                 
-				for (i = from, len = array.length, arr = []; i < end && i < len; i += 1) {
+                for (i = from, len = array.length, arr = []; i < end && i < len; i += 1) {
                     arr.push(array[i]);
                 }
                 return arr;
             }
         },
-		
-		/**
-		 * 遍历对象、数组,执行回调方法
-		 *
-		 * @param {Object|Array} obj
-		 * @param {Function} callback(index, object)
-		 */
-		each: function (obj, callback) {
-			if (callback) {
-				var i = 0;
-				if (isArray(obj)) {
-					for ( ; i < length; i++ ) {
-						var val = callback.call( obj[ i ], i, obj[ i ] );
+        
+        /**
+         * 遍历对象、数组,执行回调方法
+         *
+         * @param {Object|Array} obj
+         * @param {Function} callback(index, object)
+         */
+        each: function (obj, callback) {
+            if (callback) {
+                var i = 0;
+                if (isArray(obj)) {
+                    for ( ; i < length; i++ ) {
+                        var val = callback.call( obj[ i ], i, obj[ i ] );
 
-						if ( val === false ) {
-							break;
-						}
-					}
-				} else { 
-					for ( i in obj ) {
-						var val = callback.call( obj[ i ], i, obj[ i ] );
+                        if ( val === false ) {
+                            break;
+                        }
+                    }
+                } else { 
+                    for ( i in obj ) {
+                        var val = callback.call( obj[ i ], i, obj[ i ] );
 
-						if ( val === false ) {
-							break;
-						}
-					}
-				}
-			}
-		},
-		
-		/**
-		 * 去空格
-		 * 
-		 * @param  {String} str 字符串
+                        if ( val === false ) {
+                            break;
+                        }
+                    }
+                }
+            }
+        },
+        
+        /**
+         * 去空格
+         * 
+         * @param  {String} str 字符串
          * @return {String}
-		 * @example
-		 * .trim('    test    ');
-		 * return test
-		 */
-		trim :function(str){
+         * @example
+         * .trim('    test    ');
+         * return test
+         */
+        trim :function(str){
             return str.replace(/^\s+/, '').replace(/\s+$/, '');
         }
-	};
-		
+    };
+        
     /**
-	 * 扩展目标对象
-	 * 
-	 * 从源对象复制属性到目标对象
+     * 扩展目标对象
+     * 
+     * 从源对象复制属性到目标对象
      * 
      * @param {Mixed} dest 被扩展的对象或数组
      * @param {Mixed} source {Object|...} 用来参照扩展的对象或数组
      * @return {Mixed} 返回被扩展后的对象或数组
      * 
      * @example
-     * 		// 用 B ...  扩展 A 对象;
-     *		stone.extend(A, B ...);
+     *         // 用 B ...  扩展 A 对象;
+     *        stone.extend(A, B ...);
      */
     var extend = function(dest) {
-    	var i = 1, source;
-    	var args = stone.slice(arguments, i);
-		
-    	if (!dest || !args) return dest;
-    	
-    	for ( ; i < arguments.length; i++) {
-    		if ( (source = arguments[ i ]) ) {
-    			for (var idx in source) {
-                	var field = source[idx];
-                	
+        var i = 1, source;
+        var args = stone.slice(arguments, i);
+        
+        if (!dest || !args) return dest;
+        
+        for ( ; i < arguments.length; i++) {
+            if ( (source = arguments[ i ]) ) {
+                for (var idx in source) {
+                    var field = source[idx];
+                    
                     if (dest[idx] === field) continue;
-    				
+                    
                     if (isObject(idx) && !isArray(idx) && field !== null) {
-                    	extend(dest[idx], field);
-    					
+                        extend(dest[idx], field);
+                        
                     } else if (field !== undefined) {
-                    	dest[idx] = field;
+                        dest[idx] = field;
                     }
                 }
-    		}
-    	}
+            }
+        }
         return dest;
     };
     
@@ -185,19 +185,19 @@
      * @returns {Function}
      * 
      * @example
-     * 		var Smile = stone.Class.extend({
-	 *			init: function() {
-	 *				this.name = 'super';
-	 *			},
-	 *			smile : function() {
-	 *				alert(this.name);
-	 *			}
-	 *		});
-	 *		
-	 *		var s = new Smile();
+     *         var Smile = stone.Class.extend({
+     *            init: function() {
+     *                this.name = 'super';
+     *            },
+     *            smile : function() {
+     *                alert(this.name);
+     *            }
+     *        });
+     *        
+     *        var s = new Smile();
      */
     Class.extend = function(proto) {
-    	var that = this,
+        var that = this,
             klass = function() {},
             fn, // super
             subclass = proto && proto.init ? proto.init : function () {
@@ -217,14 +217,14 @@
     };
     
     Class.prototype = {
-    	defaults : {},
-		/**
-		 * 初始化 options
-		 * @param {Array} options
-		 */
-    	_initOptions : function(options) {
-    		var opts = options || {};
-    		this.options = $.extend({}, this.defaults, opts);
+        defaults : {},
+        /**
+         * 初始化 options
+         * @param {Array} options
+         */
+        _initOptions : function(options) {
+            var opts = options || {};
+            this.options = $.extend({}, this.defaults, opts);
         },
         /**
          * 延迟执行
@@ -232,22 +232,22 @@
          * @param {Object} context 上下文
          * @param {Number} defer 毫秒
          * @param {Mixed} args 参数（可空）
-		 *
+         *
          * @returns {Function}
-		 *
-		 * @example
-		 * function test(n){
-		 *     console.log("defer out" + n);
-		 * }
-		 * 
-		 * new stone.Class().defer(test, test, 1000)(1000);
+         *
+         * @example
+         * function test(n){
+         *     console.log("defer out" + n);
+         * }
+         * 
+         * new stone.Class().defer(test, test, 1000)(1000);
          */
         defer : function (context, fn, defer) {
             var timerID = null;
             return function(args) {
-				clearTimeout(timerID); // 互斥执行
-				timerID = setTimeout(function () { fn.apply(context, [args] || []); }, defer);
-			};
+                clearTimeout(timerID); // 互斥执行
+                timerID = setTimeout(function () { fn.apply(context, [args] || []); }, defer);
+            };
         }
     };
     
@@ -255,32 +255,32 @@
      * UI 管理器, 提供对实例化的组件进行管理
      */
     stone.Register = {
-    	register : {},
-    	get : function (type, id) {
-    		var widgets = this.register[type] || [];
-    		return widgets ? widgets[id] : null;
-    	},
+        register : {},
+        get : function (type, id) {
+            var widgets = this.register[type] || [];
+            return widgets ? widgets[id] : null;
+        },
         add : function (type, widget) {
-    		var widgets = this.register[type] || [];
-    		widgets[widget.id] = widget;
-    		this.register[type] = widgets;
-    	},
+            var widgets = this.register[type] || [];
+            widgets[widget.id] = widget;
+            this.register[type] = widgets;
+        },
         size : function (type) {
-        	if (!type) {
-        		return this.register.length;
-        	} else {
-        		return this.register[type] ? this.register[type].length : 0;
-        	}
-    	},
-    	remove : function(type, id) {
-    		if (this.register[type]) {
-    			var _widget = this.register[type][id];
-    			if (_widget) {
-    				_widget.destroy && _widget.destroy();
-    			}
-    			delete this.register[type][id];
-    		}
-    	}
+            if (!type) {
+                return this.register.length;
+            } else {
+                return this.register[type] ? this.register[type].length : 0;
+            }
+        },
+        remove : function(type, id) {
+            if (this.register[type]) {
+                var _widget = this.register[type][id];
+                if (_widget) {
+                    _widget.destroy && _widget.destroy();
+                }
+                delete this.register[type][id];
+            }
+        }
     };
     
     var Event = function () {};
@@ -292,8 +292,8 @@
      * @tips 当 options 中包含 'disabled', 则不会对该操作进行响应
      */
     Event = Class.extend({
-    	_events : {},
-    	/**
+        _events : {},
+        /**
          * 绑定一个事件，并且返回一个对象用于解绑该事件
          *
          * e = event.bind('test',callback);
@@ -304,24 +304,24 @@
          * @param {Object} context 上下文
          */
         bind: function (eventType, handler, context) {
-        	/*
-        	 * 支持数组形式批量绑定
-        	 * event.bind({
-        	 * click : {handler : function() {}, context : this}
-        	 * });
-        	 */ 
+            /*
+             * 支持数组形式批量绑定
+             * event.bind({
+             * click : {handler : function() {}, context : this}
+             * });
+             */ 
             if (eventType.constructor === Array) {
                 for (var idx in eventType) {
-                	var evt = eventType[idx];
+                    var evt = eventType[idx];
                     this.bind(idx, evt.handler, evt.context);
                 }
                 return;
             }
             if (typeof handler != 'function') return false;
-            	
+                
             var name = eventType.toLowerCase(),
-            	event = this._events[name] || [],
-            	state = context || this;
+                event = this._events[name] || [],
+                state = context || this;
             
             event.push({handler : handler, context: state});
             this._events[name] = event;
@@ -338,7 +338,7 @@
          * @return {Boolean} 解绑成功返回true
          */
         unbind: function (eventType, handler) {
-        	// 不传参数清除所有事件
+            // 不传参数清除所有事件
             if (!eventType) {
                 this._events = {};
                 return;
@@ -346,14 +346,14 @@
             var eventQueue = [], name = eventType.toLowerCase();
 
             if (this._events[name]) eventQueue = this._events[name];
-            	
+                
             // 如果没有handler清除所有此类型的事件
             if (!handler) {
                 delete this._events[name];
             } else {
                 for (var i = 0, l = eventQueue.length; i < l; i++) {
                     if (eventQueue[i].handler == handler) {
-                    	eventQueue.splice(i, 1);
+                        eventQueue.splice(i, 1);
                         break;
                     }
                 }
@@ -371,7 +371,7 @@
          */
         trigger: function (eventType, args) {
             if (!eventType) {
-            	return;
+                return;
             }
             
             var eventQueue = [], name = eventType.toLowerCase();
@@ -381,12 +381,12 @@
             }
             
             if (this._events[name]) eventQueue = this._events[name];
-            	
+                
             for (var i = 0; i < eventQueue.length; i++) {
-            	var evt = eventQueue[i];
-            	if (evt.handler.apply(evt.context, args) == false) {
-            		return false;
-            	}
+                var evt = eventQueue[i];
+                if (evt.handler.apply(evt.context, args) == false) {
+                    return false;
+                }
             }
         },
         hasEvent: function (eventType) {
@@ -397,7 +397,7 @@
     });
     
     var Widget = function () {};
-	
+    
     /**
      * UI组件基类
      * 
@@ -425,16 +425,16 @@
          * @param options 
          */
         init: function (element, options) {
-        	this._initOptions(options);
-        	
-        	var opts = this.options;
-        	
-        	//指定该实例的Id
-        	this.id = opts.id ? opts.id : 'widget-' + (uuid++);
-        	
-        	if (element) {
-        		this.element = (element instanceof $ ? element : $(element));
-        	}
+            this._initOptions(options);
+            
+            var opts = this.options;
+            
+            //指定该实例的Id
+            this.id = opts.id ? opts.id : 'widget-' + (uuid++);
+            
+            if (element) {
+                this.element = (element instanceof $ ? element : $(element));
+            }
             
             this._create();
             
@@ -469,7 +469,7 @@
         bindEvents: function() {},
         
         addPlugin : function (plugin) {
-        	this._plugins.push(plugin);
+            this._plugins.push(plugin);
         },
         /**
          * 销毁该组件
@@ -483,7 +483,7 @@
             this.unbind();
             if (this._plugins) {
                 $.each(this._plugins, function(plugin){
-                	plugin.destroy && plugin.destroy();
+                    plugin.destroy && plugin.destroy();
                 });
             }
             stone.Register.remove(this.name, this.id);
@@ -494,108 +494,108 @@
      * ----  Extension jQuery : extend plugin ----
      * -------------------------------------------
      */
-	$.extend($.fn, {
-		/**
-		 * 设置 box model 宽度
-		 */
-		_outerWidth : function(width){
-			if (typeof(width) == 'undefined'){
-				if (this[0] == window){
-					return this.width() || document.body.clientWidth;
-				}
-				return this.outerWidth()||0;
-			}
-			return this.each(function(){
-				if ($._boxModel){
-					$(this).width(width - ($(this).outerWidth() - $(this).width()));
-				} else {
-					$(this).width(width);
-				}
-			});
-		},
-		
-		/**
-		 * 设置 box model 高度
-		 */
-		_outerHeight : function(height){
-			if (typeof(height) == 'undefined'){
-				if (this[0] == window){
-					return this.height() || document.body.clientHeight;
-				}
-				return this.outerHeight()||0;
-			}
-			return this.each(function(){
-				if ($._boxModel){
-					$(this).height(height - ($(this).outerHeight() - $(this).height()));
-				} else {
-					$(this).height(height);
-				}
-			});
-		},
-		
-		/**
-		 * 设置元素中滚动条的水平偏移
-		 */
-		_scrollLeft : function(left){
-			if (typeof(left) == 'undefined'){
-				return this.scrollLeft();
-			} else {
-				return this.each(function () {
-					$(this).scrollLeft(left);
-				});
-			}
-		}
-	});
-	
-	$(function(){
-		// 判断浏览器盒模型
-		var d = $('<div style="position:absolute;top:-1000px;width:100px;height:100px;padding:5px"></div>').appendTo('body');
-		d.width(100);
-		$._boxModel = parseInt(d.width()) == 100;
-		d.remove();
-	});
-	
+    $.extend($.fn, {
+        /**
+         * 设置 box model 宽度
+         */
+        _outerWidth : function(width){
+            if (typeof(width) == 'undefined'){
+                if (this[0] == window){
+                    return this.width() || document.body.clientWidth;
+                }
+                return this.outerWidth()||0;
+            }
+            return this.each(function(){
+                if ($._boxModel){
+                    $(this).width(width - ($(this).outerWidth() - $(this).width()));
+                } else {
+                    $(this).width(width);
+                }
+            });
+        },
+        
+        /**
+         * 设置 box model 高度
+         */
+        _outerHeight : function(height){
+            if (typeof(height) == 'undefined'){
+                if (this[0] == window){
+                    return this.height() || document.body.clientHeight;
+                }
+                return this.outerHeight()||0;
+            }
+            return this.each(function(){
+                if ($._boxModel){
+                    $(this).height(height - ($(this).outerHeight() - $(this).height()));
+                } else {
+                    $(this).height(height);
+                }
+            });
+        },
+        
+        /**
+         * 设置元素中滚动条的水平偏移
+         */
+        _scrollLeft : function(left){
+            if (typeof(left) == 'undefined'){
+                return this.scrollLeft();
+            } else {
+                return this.each(function () {
+                    $(this).scrollLeft(left);
+                });
+            }
+        }
+    });
+    
+    $(function(){
+        // 判断浏览器盒模型
+        var d = $('<div style="position:absolute;top:-1000px;width:100px;height:100px;padding:5px"></div>').appendTo('body');
+        d.width(100);
+        $._boxModel = parseInt(d.width()) == 100;
+        d.remove();
+    });
+    
     extend(stone, {
-    	extend : extend,
-    	Class : Class,
-    	Event : Event,
-    	Widget : Widget,
-    	Register : stone.Register,
+        extend : extend,
+        Class : Class,
+        Event : Event,
+        Widget : Widget,
+        Register : stone.Register,
 
-    	/**
-		 * 将stone下的插件桥接到jQuery
-		 * @param {String} name 插件名称
-		 * @param {Function} widget 对应的插件Class
-		 */
-		bridgeTojQuery : function (name, widget) {
-			$.fn[name] = function (options) {
-				return this.each(function () {
-					var _widget = $.data(this, "widget-" + name);
-					
-					if (options == "destroy") {
-						if (_widget) {
-							_widget.destroy();
-							stone.Register.remove(_widget.name, _widget.id);
-							$(this).removeData("widget-" + name);
-							return true;
-						}
-						return false;
-					}
-					options = options || {};
-					//不要重复绑定
-					if (!_widget) {
-						_widget = new widget(this, options);
-						$.data(this, "widget-" + name, _widget);
-					}
-					
-				});
-			};
-		},
-		out : function(message){
+        /**
+         * 将stone下的插件桥接到jQuery
+         * @param {String} name 插件名称
+         * @param {Function} widget 对应的插件Class
+         */
+        bridgeTojQuery : function (name, widget) {
+            $.fn[name] = function (options) {
+                return this.each(function () {
+                    var _widget = $.data(this, "widget-" + name);
+                    
+                    if (options == "destroy") {
+                        if (_widget) {
+                            _widget.destroy();
+                            stone.Register.remove(_widget.name, _widget.id);
+                            $(this).removeData("widget-" + name);
+                            return true;
+                        }
+                        return false;
+                    }
+                    options = options || {};
+                    //不要重复绑定
+                    if (!_widget) {
+                        _widget = new widget(this, options);
+                        $.data(this, "widget-" + name, _widget);
+                    }
+                    
+                });
+            };
+        },
+        out : function(message){
             msg = String(message);
             if (console) {
                 if (console.log) {
-                	console.log(message);
+                    console.log(message);
                 } else {
                     alert(msg);
                 }

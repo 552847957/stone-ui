@@ -17,8 +17,8 @@
 var stone = (typeof this.stone === 'undefined') ? {} : this.stone;
 
 (function ($) {
-	
-	// Define
+    
+    // Define
     var isUndefined,
     isNull,
     isNumber,
@@ -31,7 +31,7 @@ var stone = (typeof this.stone === 'undefined') ? {} : this.stone;
     
     // Include
     math = Math;
-	
+    
     /**
      * 判断变量的值是否是 undefined
      * 
@@ -54,7 +54,7 @@ var stone = (typeof this.stone === 'undefined') ? {} : this.stone;
     
     /**
      * 判断变量的类型是否是 Number
-	 *
+     *
      * @param {Mixed} o 传入被检测变量的名称
      * @return {Boolean} 当 o 的类型是 number 时返回 true
      */
@@ -64,7 +64,7 @@ var stone = (typeof this.stone === 'undefined') ? {} : this.stone;
     
     /**
      * 判断变量的类型是否是 Boolean
-	 *
+     *
      * @param {Mixed} o 传入被检测变量的名称
      * @return {Boolean} 当 o 的类型是 boolean 时返回 true
      */
@@ -74,7 +74,7 @@ var stone = (typeof this.stone === 'undefined') ? {} : this.stone;
     
     /**
      * 判断变量的类型是否是 String
-	 *
+     *
      * @param {Mixed} o 传入被检测变量的名称
      * @return {Boolean} 当 o 的类型是 string 时返回 true
      */
@@ -126,9 +126,9 @@ var stone = (typeof this.stone === 'undefined') ? {} : this.stone;
      * 全局唯一标识符 (GUID)
      */
     var guid = function () {
-    	var id = "", i, random;
-    	
-    	// 生成又连字符分隔的 32 位数字
+        var id = "", i, random;
+        
+        // 生成又连字符分隔的 32 位数字
         for (i = 0; i < 32; i++) {
             random = math.random() * 16 | 0;
 
@@ -146,8 +146,8 @@ var stone = (typeof this.stone === 'undefined') ? {} : this.stone;
      */
     var support = {};
     support.prototype = {
-		hasHW3D : ("WebKitCSSMatrix" in window && "m11" in new window.WebKitCSSMatrix()) || "MozPerspective" in document.documentElement.style || "msPerspective" in document.documentElement.stylem,
-		detectBrowser : function(ua) {
+        hasHW3D : ("WebKitCSSMatrix" in window && "m11" in new window.WebKitCSSMatrix()) || "MozPerspective" in document.documentElement.style || "msPerspective" in document.documentElement.stylem,
+        detectBrowser : function(ua) {
             var browser = false, match = [],
                 browserRxs = {
                     webkit: /(chrome)[ \/]([\w.]+)/i,
@@ -173,10 +173,10 @@ var stone = (typeof this.stone === 'undefined') ? {} : this.stone;
 
             return browser;
         },
-		browser: function() {
-			return this.detectBrowser(navigator.userAgent);
-		},
-		msPointers : navigator.msPointerEnabled,
+        browser: function() {
+            return this.detectBrowser(navigator.userAgent);
+        },
+        msPointers : navigator.msPointerEnabled,
         pointers : navigator.pointerEnabled
     };
     
